@@ -31,3 +31,12 @@ eureka:
     fetch-registry: true
   instance:
     prefer-ip-address: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    urls:
+      - name: Identity Access
+        url: /api/identity/v3/api-docs
+      - name: Salas
+        url: /api/salas/v3/api-docs
