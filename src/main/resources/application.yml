@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: apigateway-service
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: identity-access-service
+              uri: lb://identity-access-service
+              predicates:
+                - Path=/api/identity/**
+              filters:
+                - StripPrefix=2
+
+            - id: salas-service
+              uri: lb://salas-service
+              predicates:
+                - Path=/api/salas/**
+              filters:
+                - StripPrefix=2
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true

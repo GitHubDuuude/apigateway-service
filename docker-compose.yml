@@ -1,0 +1,18 @@
+services:
+  apigateway-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: apigateway-service
+    ports:
+      - "8080:8080"
+    environment:
+      - EUREKA_URL=http://eureka-server:8761/eureka
+    networks:
+      - mucard-network
+    restart: unless-stopped
+
+networks:
+  mucard-network:
+    external: true
+    name: mucard-network
